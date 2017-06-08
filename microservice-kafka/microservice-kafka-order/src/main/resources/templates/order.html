@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<title>Order</title>
+</head>
+<body>
+	<h1 layout:fragment="header">Order</h1>
+	<div layout:fragment="content" class="container">
+
+		<div class="row">
+			<div class="col-md-2"><b>Customer</b></div>
+			<div class="col-md-2"
+				th:text="${order.customer.firstname}+' '+${order.customer.name}"></div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-2"><b>Total price</b></div>
+			<div class="col-md-2" th:text="${order.totalPrice()}"></div>
+		</div>
+
+		<div class="row">
+			<h2>Shipping Address</h2>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2"><b>Street</b></div>
+			<div class="col-md-2" th:text="${order.shippingAddress.street}"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-2"><b>Zip</b></div>
+			<div class="col-md-2" th:text="${order.shippingAddress.zip}"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-2"><b>City</b></div>
+			<div class="col-md-2" th:text="${order.shippingAddress.city}"></div>
+		</div>
+
+
+		<div class="row">
+			<h2>Billing Address</h2>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2"><b>Street</b></div>
+			<div class="col-md-2" th:text="${order.billingAddress.street}"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-2"><b>Zip</b></div>
+			<div class="col-md-2" th:text="${order.billingAddress.zip}"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-2"><b>City</b></div>
+			<div class="col-md-2" th:text="${order.billingAddress.city}"></div>
+		</div>
+
+		<div class="row">
+			<h2>Order Lines</h2>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2"><b>Quantity</b></div>
+			<div class="col-md-2"><b>Item</b></div>
+			<div class="col-md-2"><b>Price</b></div>
+
+		</div>
+
+		<div class="row" th:each="orderLine : ${order.orderLine}">
+			<div class="col-md-2" th:text="${orderLine.count}"></div>
+			<div class="col-md-2" th:text="${orderLine.item.name}"></div>
+			<div class="col-md-2" th:text="${orderLine.item.price}"></div>
+		</div>
+	</div>
+</body>
+</html>
