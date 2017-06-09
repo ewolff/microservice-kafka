@@ -3,6 +3,7 @@ package com.ewolff.microservice.shipping.events;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
 import com.ewolff.microservice.shipping.Shipment;
@@ -21,9 +22,10 @@ public class OrderKafkaListener {
 	}
 
 	@KafkaListener(topics = "order")
-	public void order(Shipment shipment) {
+	public void order(Shipment shipment, Acknowledgment acknowledgment) {
 		log.info("Revceived shipment " + shipment.getId());
 		shipmentRepository.save(shipment);
+		acknowledgment.acknowledge();
 	}
 
 }
