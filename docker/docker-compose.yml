@@ -16,28 +16,30 @@ services:
       KAFKA_CREATE_TOPICS: "order:5:1"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+  apache:
+    build: apache
+    links:
+     - order
+     - shipping
+     - invoicing
+    ports:
+     - "8080:80"
   order:
     build: ../microservice-kafka/microservice-kafka-order
     links:
      - kafka
-    ports:
-      - "8080:8080"
     environment:
       SPRING_KAFKA_BOOTSTRAP-SERVERS: kafka:9092
   shipping:
     build: ../microservice-kafka/microservice-kafka-shipping
     links:
      - kafka
-    ports:
-      - "8081:8080"
     environment:
       SPRING_KAFKA_BOOTSTRAP-SERVERS: kafka:9092
   invoicing:
     build: ../microservice-kafka/microservice-kafka-invoicing
     links:
      - kafka
-    ports:
-      - "8082:8080"
     environment:
       SPRING_KAFKA_BOOTSTRAP-SERVERS: kafka:9092
 
