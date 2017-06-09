@@ -33,8 +33,7 @@ The result should be:
 
 - Docker Compose builds the Docker images and runs them.
 - Use `docker-machine ip dev` to find the IP adress of the virtual machine.
-- You can access the order application at http://ipadresss:8080/ . 
-- You can find the shipping application at http://ipadresss:8081/ .
-- The invoicing application runs at http://ipadresss:8081/ .
+- You can access the Apache httpd at http://ipadresss:8080/ .  It
+  provides  access to all microservices.
 
 - Use `docker-machine rm dev` to destroy the virtual machine.
