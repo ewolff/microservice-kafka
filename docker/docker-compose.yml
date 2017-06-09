@@ -8,8 +8,6 @@ services:
     image: wurstmeister/kafka:0.10.2.1
     links:
      - zookeeper
-    ports:
-      - "9092:9092"
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_ADVERTISED_PORT: 9092
