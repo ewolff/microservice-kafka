@@ -29,7 +29,7 @@ public class Customer {
 		customerId = 0l;
 	}
 
-	public Customer(String firstname, String name, String email, String street, String city) {
+	public Customer(String firstname, String name, String email) {
 		super();
 		this.name = name;
 		this.firstname = firstname;
