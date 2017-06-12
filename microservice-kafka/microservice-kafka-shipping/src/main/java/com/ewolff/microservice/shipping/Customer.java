@@ -24,8 +24,9 @@ public class Customer {
 		customerId = 0l;
 	}
 
-	public Customer(String firstname, String name) {
+	public Customer(long customerId, String firstname, String name) {
 		super();
+		this.customerId = customerId;
 		this.name = name;
 		this.firstname = firstname;
 	}

@@ -7,24 +7,24 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
 import com.ewolff.microservice.invoicing.Invoice;
-import com.ewolff.microservice.invoicing.InvoiceRepository;
+import com.ewolff.microservice.invoicing.InvoiceService;
 
 @Component
 public class OrderKafkaListener {
 
 	private final Logger log = LoggerFactory.getLogger(OrderKafkaListener.class);
 
-	private InvoiceRepository invoiceRepository;
+	private InvoiceService invoiceService;
 
-	public OrderKafkaListener(InvoiceRepository invoiceRepository) {
+	public OrderKafkaListener(InvoiceService invoiceService) {
 		super();
-		this.invoiceRepository = invoiceRepository;
+		this.invoiceService = invoiceService;
 	}
 
 	@KafkaListener(topics = "order")
 	public void order(Invoice invoice, Acknowledgment acknowledgment) {
 		log.info("Revceived invoice " + invoice.getId());
-		invoiceRepository.save(invoice);
+		invoiceService.generateInvoice(invoice);
 		acknowledgment.acknowledge();
 	}
 

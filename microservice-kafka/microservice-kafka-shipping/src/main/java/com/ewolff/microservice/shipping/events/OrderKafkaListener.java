@@ -7,24 +7,24 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
 import com.ewolff.microservice.shipping.Shipment;
-import com.ewolff.microservice.shipping.ShipmentRepository;
+import com.ewolff.microservice.shipping.ShipmentService;
 
 @Component
 public class OrderKafkaListener {
 
 	private final Logger log = LoggerFactory.getLogger(OrderKafkaListener.class);
 
-	private ShipmentRepository shipmentRepository;
+	private ShipmentService shipmentService;
 
-	public OrderKafkaListener(ShipmentRepository shipmentRepository) {
+	public OrderKafkaListener(ShipmentService shipmentService) {
 		super();
-		this.shipmentRepository = shipmentRepository;
+		this.shipmentService = shipmentService;
 	}
 
 	@KafkaListener(topics = "order")
 	public void order(Shipment shipment, Acknowledgment acknowledgment) {
 		log.info("Revceived shipment " + shipment.getId());
-		shipmentRepository.save(shipment);
+		shipmentService.ship(shipment);
 		acknowledgment.acknowledge();
 	}
 

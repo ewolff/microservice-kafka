@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -20,7 +19,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Invoice {
 
 	@Id
-	@GeneratedValue
 	private long id;
 
 	@Embedded
@@ -37,6 +35,15 @@ public class Invoice {
 	public Invoice() {
 		super();
 		invoiceLine = new ArrayList<InvoiceLine>();
+	}
+
+	public Invoice(long id, Customer customer, Date updated, Address billingAddress, List<InvoiceLine> invoiceLine) {
+		super();
+		this.id = id;
+		this.customer = customer;
+		this.updated = updated;
+		this.billingAddress = billingAddress;
+		this.invoiceLine = invoiceLine;
 	}
 
 	public Address getBillingAddress() {

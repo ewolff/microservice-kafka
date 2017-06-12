@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -20,7 +19,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Shipment {
 
 	@Id
-	@GeneratedValue
 	private long id;
 
 	@Embedded
@@ -37,6 +35,16 @@ public class Shipment {
 	public Shipment() {
 		super();
 		shipmentLine = new ArrayList<ShipmentLine>();
+	}
+
+	public Shipment(long id, Customer customer, Date updated, Address shippingAddress,
+			List<ShipmentLine> shipmentLine) {
+		super();
+		this.id = id;
+		this.customer = customer;
+		this.updated = updated;
+		this.shippingAddress = shippingAddress;
+		this.shipmentLine = shipmentLine;
 	}
 
 	public Address getShippingAddress() {
