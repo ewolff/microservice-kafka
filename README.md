@@ -24,6 +24,7 @@ Technologies
 
 - Spring Boot
 - Spring Kafka
+- Apache httpd
 - Kafka
 - Zookeeper
 - Postgres
@@ -46,10 +47,46 @@ The microservices are:
 - [microserivce-kafka-shipping](microservice-kafka/microservice-kafka-shipping) for the shipping
 - [microservice-kafka-invoicing](microservice-kafka/microservice-kafka-invoicing) for the invoices
 
-
 The data of an order is copied - including the data of the customer
 and the items. So if a customer or item changes in the order system
 this does not influence existing shipments and invoices. It would be
 odd if a change to a price would also change existing invoices. Also
 only the information needed for the shipment and the invoice are
 copied over to the other systems.
+
+The Order microservice uses Spring's `KafkaTemplate` to send message
+while the other two microservices use the annotation `@KafkaListener`
+on the methods that should be called if a new record comes in. All
+records are put in the `order` topic. It has five partitions to allow
+for scalability.
+
+For tests an embedded Kafka server is used. A `@ClassRule` starts
+it. And a method annotated with `@BeforeClass` configures Spring Kafka
+to use the embedded Kafka server.
+
+The orders are serialized as JSON. The other two microservices just
+read the data they need for shipping and invoicing. They use their own
+data structure for this to avoid code dependencies between the
+microservices and because they need different data.
+
+There are three Docker container for the microservices. The other
+Docker containers are for Apache httpd, Kafka, Zookeeper and Postgres.
+
+Incoming http request are handled by the Apache httpd server. It is
+available at port 8080 of the Docker host
+e.g. <http://localhost:8080>.  HTTP requests are forwarded to the
+microservices. Kafka is used for the communication between the
+microservices. Kafka needs Zookeeper to coordinate instances. Postgres
+is used by all microservices to store data. Each microservices uses
+its own database in the Postgres instance so they are decoupled in
+that regard.
+
+You can scale the listener with e.g. `docker-compose scale
+shipping=2`. The logs (`docker logs
+mskafka_shipping_1`) will show which partitions the instances listen
+to and which records they handle.
+
+You can also start a shell on the Kafka server `docker exec -it
+mskafka_kafka_1 /bin/sh` and then take a look at the records in the
+topic using `kafka-console-consumer.sh --bootstrap-server kafka:9092
+--topic order --from-beginning`.
