@@ -15,16 +15,19 @@ https://docs.docker.com/compose/#installation-and-set-up
 - Install Docker, see https://docs.docker.com/installation/
 - Install Docker Machine, see https://docs.docker.com/machine/#installation
 - Go to directory `microservice-kafka` and run `mvn package` there
-- Execute `docker-machine create  --virtualbox-memory "4096" --driver
-  virtualbox dev` . This will create a new environment called `dev`with Docker
-  Machine. It will be virtual machine in Virtual Box with 4GB RAM.
-- Execute `eval "$(docker-machine env dev)"` (Linux / Mac OS X). You
-     might need to set your shell: `eval "$(docker-machine env --shell
-     bash dev)"`. For Windows it's
-    `docker-machine.exe env --shell powershell dev` (Windows,
-    Powershell) /  `docker-machine.exe env --shell cmd dev` (Windows,
-    cmd.exe). Now the docker tool will use the newly created virtual
-    machine as environment.
+- If you want to use Docker Machine:
+  - Execute `docker-machine create  --virtualbox-memory "4096" --driver
+    virtualbox dev` . This will create a new environment called `dev`with Docker
+    Machine. It will be virtual machine in Virtual Box with 4GB RAM.
+  - Execute `eval "$(docker-machine env dev)"` (Linux / Mac OS X). You
+       might need to set your shell: `eval "$(docker-machine env --shell
+       bash dev)"`. For Windows it's
+      `docker-machine.exe env --shell powershell dev` (Windows,
+      Powershell) /  `docker-machine.exe env --shell cmd dev` (Windows,
+      cmd.exe). Now the docker tool will use the newly created virtual
+      machine as environment.
+- If you are running a local Docker installation on Windows or macOS,
+  go to Preferences -> Advanced and make sure memory is set to 4 GB. 
 - Change to the directory `docker` and run `docker-compose
    build`followed by `docker-compose up -d`. 
 
