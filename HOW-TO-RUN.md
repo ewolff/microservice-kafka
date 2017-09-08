@@ -81,7 +81,7 @@ images, install software into Docker images and will therefore take
 its time:
 
 ```
-[~/microservice-consul/docker]docker-compose build 
+[~/microservice-kafka/docker]docker-compose build 
 ...
 Step 7/7 : CMD apache2ctl -D FOREGROUND
  ---> Using cache
