@@ -32,19 +32,19 @@ services:
      - kafka
      - postgres
     environment:
-      SPRING_KAFKA_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
   shipping:
     build: ../microservice-kafka/microservice-kafka-shipping
     links:
      - kafka
      - postgres
     environment:
-      SPRING_KAFKA_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
   invoicing:
     build: ../microservice-kafka/microservice-kafka-invoicing
     links:
      - kafka
      - postgres
     environment:
-      SPRING_KAFKA_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
 
