@@ -6,7 +6,7 @@ services:
       - "2181:2181"
   kafka:
     image: wurstmeister/kafka:0.10.2.1
-    links:
+    depends_on:
      - zookeeper
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka
@@ -15,7 +15,7 @@ services:
       KAFKA_CREATE_TOPICS: "order:5:1"
   apache:
     build: apache
-    links:
+    depends_on:
      - order
      - shipping
      - invoicing
@@ -23,28 +23,31 @@ services:
      - "8080:80"
   postgres:
     build: postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: dbpass
       POSTGRES_USER: dbuser
   order:
     build: ../microservice-kafka/microservice-kafka-order
-    links:
+    depends_on:
      - kafka
      - postgres
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
   shipping:
     build: ../microservice-kafka/microservice-kafka-shipping
-    links:
+    depends_on:
      - kafka
      - postgres
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
   invoicing:
     build: ../microservice-kafka/microservice-kafka-invoicing
-    links:
+    depends_on:
      - kafka
      - postgres
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-
+volumes:
+  pg_data:
