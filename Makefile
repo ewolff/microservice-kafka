@@ -7,7 +7,7 @@ PWD := $(shell pwd)
 all: clean build run
 
 build:
-	docker run -ti --rm -v $(PWD)/microservice-kafka:/app maven:$(IMAGE_TAG) /bin/sh -c 'cd /app && mvn clean package package -Dmaven.test.skip=true'
+	docker run -ti --rm -v $(PWD)/microservice-kafka:/app maven:$(IMAGE_TAG) /bin/sh -c 'cd /app && mvn clean package'
 run:
 	cd docker && docker-compose build && docker-compose up -d
 clean:  clean-build

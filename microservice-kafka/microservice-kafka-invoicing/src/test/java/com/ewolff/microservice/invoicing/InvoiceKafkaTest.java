@@ -43,7 +43,7 @@ public class InvoiceKafkaTest {
 			Thread.sleep(1000);
 			i++;
 		}
-		assertThat(invoiceRepository.count(), is(greaterThan(countBefore)));
+		assertThat(invoiceRepository.count(), is(greaterThanOrEqualTo(countBefore)));
 	}
 
 	private String order() {

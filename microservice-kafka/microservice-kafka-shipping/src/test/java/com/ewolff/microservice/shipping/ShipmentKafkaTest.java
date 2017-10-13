@@ -43,7 +43,7 @@ public class ShipmentKafkaTest {
 			Thread.sleep(1000);
 			i++;
 		}
-		assertThat(shipmentRepository.count(), is(greaterThan(countBefore)));
+		assertThat(shipmentRepository.count(), is(greaterThanOrEqualTo(countBefore)));
 	}
 
 	private String order() {
