@@ -65,10 +65,15 @@ For tests an embedded Kafka server is used. A `@ClassRule` starts
 it. And a method annotated with `@BeforeClass` configures Spring Kafka
 to use the embedded Kafka server.
 
-The orders are serialized as JSON. The other two microservices just
-read the data they need for shipping and invoicing. They use their own
-data structure for this to avoid code dependencies between the
-microservices and because they need different data.
+The orders are serialized as JSON.
+So the `Order` object of the order microservice is serialized as a JSON data structure.
+The other two microservices just
+read the data they need for shipping and invoicing. So the invoicing microservices reads the `Invoice`object and the 
+delivery microservice the `Delivery`object.
+This avoids code dependencies between the
+microservices. `Order` contains all the data for `Invoice` as well as `Delivery`.
+JSON serialization is flexible. So when an `Order` is deserialized into `Invoice` and `Delivery` just the needed data is read.
+The additional data is just ignored.
 
 There are three Docker container for the microservices. The other
 Docker containers are for Apache httpd, Kafka, Zookeeper and Postgres.
