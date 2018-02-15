@@ -30,7 +30,7 @@ public class InvoiceKafkaTest {
 	public static KafkaEmbedded embeddedKafka = new KafkaEmbedded(1, true, "order");
 
 	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
+	public static void setUpBeforeClass() {
 		System.setProperty("spring.kafka.bootstrap-servers", embeddedKafka.getBrokersAsString());
 	}
 
