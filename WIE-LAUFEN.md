@@ -34,12 +34,12 @@ Informationen zu Maven und Docker finden sich im
 
 ## Build
 
-Wechsel in das Verzeichnis `microservice-kafka-demo` und starte
+Wechsel in das Verzeichnis `microservice-kafka` und starte
 `./mvnw clean package` bzw. `mvnw.cmd clean package`. Das wird einige
 Zeit dauern:
 
 ```
-[~/microservice-kafka/microservice-kafka-demo]./mvnw clean package
+[~/microservice-kafka/microservice-kafka]./mvnw clean package
 ....
 [INFO] 
 [INFO] --- maven-jar-plugin:2.6:jar (default-jar) @ microservice-kafka-invoicing ---
