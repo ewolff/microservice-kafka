@@ -1,24 +1,31 @@
 package com.ewolff.microservice.shipping;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.test.rule.KafkaEmbedded;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = ShippingTestApp.class, webEnvironment = WebEnvironment.DEFINED_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @ActiveProfiles("test")
 public class ShipmentKafkaTest {
+	
+	private final static Logger log = LoggerFactory.getLogger(ShipmentKafkaTest.class);
 
 	@Autowired
 	private ShipmentRepository shipmentRepository;
@@ -31,7 +38,9 @@ public class ShipmentKafkaTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		System.setProperty("spring.kafka.bootstrap-servers", embeddedKafka.getBrokersAsString());
+		String brokerAddress = embeddedKafka.getBrokersAsString(); 
+		System.setProperty("spring.kafka.bootstrap-servers", brokerAddress);
+		log.debug("-- embedded broker address is: " + brokerAddress);
 	}
 
 	@Test
