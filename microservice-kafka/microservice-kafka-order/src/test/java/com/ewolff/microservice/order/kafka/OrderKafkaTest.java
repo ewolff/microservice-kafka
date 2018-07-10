@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.kafka.test.rule.KafkaEmbedded;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -23,6 +25,7 @@ import com.ewolff.microservice.order.logic.OrderService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = OrderApp.class, webEnvironment = WebEnvironment.DEFINED_PORT)
 @ActiveProfiles("test")
+@DirtiesContext(classMode = ClassMode.BEFORE_CLASS)
 public class OrderKafkaTest {
 
 	public static Logger logger = LoggerFactory.getLogger(OrderKafkaTest.class);
