@@ -24,7 +24,7 @@ public class CustomerFormatter implements Formatter<Customer> {
 
 	@Override
 	public Customer parse(String text, Locale locale) throws ParseException {
-		return customerRepository.findOne(Long.parseLong(text));
+		return customerRepository.findById(Long.parseLong(text)).get();
 	}
 
 }

@@ -22,7 +22,7 @@ public class ShippingController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
 	public ModelAndView Item(@PathVariable("id") long id) {
-		return new ModelAndView("shipment", "shipment", shipmentRepository.findOne(id));
+		return new ModelAndView("shipment", "shipment", shipmentRepository.findById(id).get());
 	}
 
 	@RequestMapping("/")

@@ -35,7 +35,7 @@ public class OrderService {
 	}
 
 	public double getPrice(long orderId) {
-		return orderRepository.findOne(orderId).totalPrice();
+		return orderRepository.findById(orderId).get().totalPrice();
 	}
 
 }

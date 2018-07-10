@@ -24,7 +24,7 @@ public class ItemFormatter implements Formatter<Item> {
 
 	@Override
 	public Item parse(String text, Locale locale) throws ParseException {
-		return itemRepository.findOne(Long.parseLong(text));
+		return itemRepository.findById(Long.parseLong(text)).get();
 	}
 
 }
