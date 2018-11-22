@@ -122,13 +122,21 @@ Option `-d` bedeutet, dass die Container im Hintergrund gestartet
 werden und keine Ausgabe auf der Kommandozeile erzeugen.
 
 ```
-[~/microservice-kafka/docker]docker images 
-REPOSITORY                                              TAG                 IMAGE ID            CREATED             SIZE
-mskafka_invoicing                                       latest              1fddb3132141        43 seconds ago      214MB
-mskafka_shipping                                        latest              7340d766ea6f        46 seconds ago      214MB
-mskafka_order                                           latest              0f9848e55054        49 seconds ago      215MB
-mskafka_kafkacat                                        latest              461e8b02bb99        12 days ago          113MB
-mskafka_postgres                                        latest              2b2f4f035d6d        12 days ago          269MB
+[~/microservice-kafka/docker]docker-compose up -d
+Starting mskafka_zookeeper_1 ... 
+Starting mskafka_postgres_1 ... 
+Starting mskafka_zookeeper_1
+Starting mskafka_zookeeper_1 ... done
+Starting mskafka_kafka_1 ... 
+Starting mskafka_kafka_1 ... done
+Recreating mskafka_order_1 ... 
+Recreating mskafka_invoicing_1 ... 
+Recreating mskafka_invoicing_1
+Recreating mskafka_shipping_1 ... 
+Recreating mskafka_order_1
+Recreating mskafka_invoicing_1 ... done
+Recreating mskafka_apache_1 ... 
+Recreating mskafka_apache_1 ... done
 ```
 
 Wenn das System zum ersten Mal gestartet wird, werden noch einige
