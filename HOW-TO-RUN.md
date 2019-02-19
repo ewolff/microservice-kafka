@@ -139,7 +139,7 @@ c83247820e4d        mskafka_postgres               "docker-entrypoint..."   12 d
 a397c26c1947        wurstmeister/zookeeper:3.4.6   "/bin/sh -c '/usr/..."   12 days ago         Up 6 minutes        22/tcp, 2888/tcp, 3888/tcp, 0.0.0.0:2181->2181/tcp   mskafka_zookeeper_1
 ```
 `docker ps -a`  also shows the terminated Docker containers. That is
-useful to see Docker containers that crashed rigth after they started.
+useful to see Docker containers that crashed right after they started.
 
 If one of the containers is not running, you can look at its logs using
 e.g.  `docker logs mskafka_order_1`. The name of the container is
