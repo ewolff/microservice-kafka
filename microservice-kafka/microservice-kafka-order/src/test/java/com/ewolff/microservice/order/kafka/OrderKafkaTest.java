@@ -12,26 +12,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.kafka.test.rule.KafkaEmbedded;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
+import org.springframework.kafka.test.rule.EmbeddedKafkaRule;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ewolff.microservice.order.OrderApp;
 import com.ewolff.microservice.order.OrderTestDataGenerator;
 import com.ewolff.microservice.order.logic.OrderService;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = OrderApp.class, webEnvironment = WebEnvironment.DEFINED_PORT)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = OrderApp.class, webEnvironment = WebEnvironment.NONE)
 @ActiveProfiles("test")
-@DirtiesContext(classMode = ClassMode.BEFORE_CLASS)
 public class OrderKafkaTest {
 
 	public static Logger logger = LoggerFactory.getLogger(OrderKafkaTest.class);
 
 	@ClassRule
-	public static KafkaEmbedded embeddedKafka = new KafkaEmbedded(1, true, "order");
+	public static EmbeddedKafkaRule embeddedKafka = new EmbeddedKafkaRule(1, false, "order");
 
 	@Autowired
 	private KafkaListenerBean kafkaListenerBean;
@@ -44,7 +41,7 @@ public class OrderKafkaTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		System.setProperty("spring.kafka.bootstrap-servers", embeddedKafka.getBrokersAsString());
+		System.setProperty("spring.kafka.bootstrap-servers", embeddedKafka.getEmbeddedKafka().getBrokersAsString());
 	}
 
 	@Test
