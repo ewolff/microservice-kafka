@@ -23,7 +23,7 @@ public class OrderKafkaListener {
 
 	@KafkaListener(topics = "order")
 	public void order(Shipment shipment, Acknowledgment acknowledgment) {
-		log.info("Revceived shipment " + shipment.getId());
+		log.info("Received shipment " + shipment.getId());
 		shipmentService.ship(shipment);
 		acknowledgment.acknowledge();
 	}
