@@ -74,6 +74,10 @@ einfach löschen.
 
 * Die Tests nutzen einige Ports auf dem Rechner. Stelle sicher, dass
   im Hintergrund keine Server laufen.
+  Vor allem muss der Kafka-Port 9092 und der HTTP-Port 8080
+  verfügbar sein. Gegebenenfalls sind auch noch andere
+  Ports notwendig.
+
 
 * Führe die Tests beim Build nicht aus: `./mvnw clean package
   -Dmaven.test.skip=true` bzw. `mvnw.cmd clean package

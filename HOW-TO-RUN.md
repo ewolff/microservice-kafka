@@ -61,6 +61,8 @@ doubt: delete the file.
 
 * The tests use some ports on the local machine. Make sure that no
 server runs in the background.
+In particular make sure the Kafka port 9092 and the HTTP port 8080 are
+available. There might be other ports that are needed, too.
 
 * Skip the tests: `./mvnw clean package -Dmaven.test.skip=true` or
   `mvnw.cmd clean package -Dmaven.test.skip=true` (Windows).
