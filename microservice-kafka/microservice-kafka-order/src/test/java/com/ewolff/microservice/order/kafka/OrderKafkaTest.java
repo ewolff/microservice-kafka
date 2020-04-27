@@ -12,7 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
+import org.springframework.kafka.listener.MessageListenerContainer;
 import org.springframework.kafka.test.rule.EmbeddedKafkaRule;
+import org.springframework.kafka.test.utils.ContainerTestUtils;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -28,7 +31,7 @@ public class OrderKafkaTest {
 	public static Logger logger = LoggerFactory.getLogger(OrderKafkaTest.class);
 
 	@ClassRule
-	public static EmbeddedKafkaRule embeddedKafka = new EmbeddedKafkaRule(1, false, "order");
+	public static EmbeddedKafkaRule embeddedKafka = new EmbeddedKafkaRule(1, false, 1, "order");
 
 	@Autowired
 	private KafkaListenerBean kafkaListenerBean;
@@ -39,6 +42,9 @@ public class OrderKafkaTest {
 	@Autowired
 	private OrderTestDataGenerator orderTestDataGenerator;
 
+	@Autowired
+	private KafkaListenerEndpointRegistry kafkaListenerEndpointRegistry;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		System.setProperty("spring.kafka.bootstrap-servers", embeddedKafka.getEmbeddedKafka().getBrokersAsString());
@@ -46,6 +52,10 @@ public class OrderKafkaTest {
 
 	@Test
 	public void orderCreatedSendsKafkaMassage() throws Exception {
+		for (MessageListenerContainer messageListenerContainer : kafkaListenerEndpointRegistry.getListenerContainers()) {
+			ContainerTestUtils.waitForAssignment(messageListenerContainer,
+					1);
+		}
 		int receivedBefore = kafkaListenerBean.getReceived();
 		orderService.order(orderTestDataGenerator.createOrder());
 		int i = 0;
