@@ -1,6 +1,8 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 # Update Ubuntu
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update ; apt-get dist-upgrade -y -qq 
 
 # Install Apache + modules
