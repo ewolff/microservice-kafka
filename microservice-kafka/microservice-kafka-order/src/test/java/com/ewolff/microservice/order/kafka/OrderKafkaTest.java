@@ -52,9 +52,15 @@ public class OrderKafkaTest {
 
 	@Test
 	public void orderCreatedSendsKafkaMassage() throws Exception {
-		for (MessageListenerContainer messageListenerContainer : kafkaListenerEndpointRegistry.getListenerContainers()) {
-			ContainerTestUtils.waitForAssignment(messageListenerContainer,
-					1);
+		for (int i = 0; i < 3; i++) {
+			try {
+				for (MessageListenerContainer messageListenerContainer : kafkaListenerEndpointRegistry.getListenerContainers()) {
+					ContainerTestUtils.waitForAssignment(messageListenerContainer,
+							1);
+				}
+			} catch (IllegalStateException ex) {
+				logger.warn("Waited unsuccessfully for Kafka assignments");
+			}
 		}
 		int receivedBefore = kafkaListenerBean.getReceived();
 		orderService.order(orderTestDataGenerator.createOrder());
