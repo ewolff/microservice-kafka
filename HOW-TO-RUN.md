@@ -160,4 +160,5 @@ You can now go to http://localhost:8080/ and enter an order. That will
 create a shipping and an invoice in the other two microservices.
 
 You can terminate all containers using `docker-compose down`.
-
+You can remove the stopped containers using `docker-compose rm`.
+So these two command give you a clean new start of the system.

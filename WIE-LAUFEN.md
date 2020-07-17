@@ -184,3 +184,7 @@ erfassen. Nach einiger Zeit sollte für die Bestellung eine Lieferung
 und eine Rechnung erstellt worden sei.
 
 Mit `docker-compose down` kannst du alle Container beenden.
+Und mit `docker-compose rm` kannst du die beendeten container
+löschen.
+Zusammen ermöglichen diese beiden Kommandos also einen sauberen
+Neustart des Systems.
