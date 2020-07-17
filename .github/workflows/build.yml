@@ -18,6 +18,6 @@ jobs:
       with:
         java-version: 10
     - name: Build microservices with Maven
-      run: cd microservice-kafka && mvn -B package --file pom.xml
+      run: cd microservice-kafka && mvn -B -Dtest=!*KafkaTest package --file pom.xml 
     - name: Create Docker images
       run: cd docker && docker-compose build
