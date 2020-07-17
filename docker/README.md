@@ -6,6 +6,12 @@ supports Virtual Box but also many other technologies including
 several clouds. Docker Compose create all the Docker containers needed
 fot the systems.
 
+*THIS IS A DEMO. IT IS UNSECURE AND CONTAINS DEFAULT PASSWORDS AND PASSWORDS
+IN CLEAN TEXT IN CONFIGURATION FILES BESIDES OTHER THINGS. IT IS MEANT TO BE
+EASY TO UNDERSTAND.*
+
+*DO NOT RUN THIS IN PRODUCTION!!!!!!*
+
 To run the demo:
 
 - Install Maven, see https://maven.apache.org/download.cgi
