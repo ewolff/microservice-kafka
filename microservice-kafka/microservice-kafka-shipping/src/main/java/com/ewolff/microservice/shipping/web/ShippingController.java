@@ -25,7 +25,7 @@ public class ShippingController {
 		return new ModelAndView("shipment", "shipment", shipmentRepository.findById(id).get());
 	}
 
-	@RequestMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView ItemList() {
 		return new ModelAndView("shipmentlist", "shipments", shipmentRepository.findAll());
 	}

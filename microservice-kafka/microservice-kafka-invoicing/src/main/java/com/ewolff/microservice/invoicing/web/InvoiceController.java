@@ -25,7 +25,7 @@ public class InvoiceController {
 		return new ModelAndView("invoice", "invoice", invoiceRepository.findById(id).get());
 	}
 
-	@RequestMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView ItemList() {
 		return new ModelAndView("invoicelist", "invoices", invoiceRepository.findAll());
 	}

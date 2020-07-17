@@ -42,7 +42,7 @@ class OrderController {
 		return customerRepository.findAll();
 	}
 
-	@RequestMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView orderList() {
 		return new ModelAndView("orderlist", "orders", orderRepository.findAll());
 	}
