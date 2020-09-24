@@ -99,6 +99,20 @@
 			<artifactId>bootstrap</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers</artifactId>
+			<version>1.14.3</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>kafka</artifactId>
+			<version>1.14.3</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 </project>

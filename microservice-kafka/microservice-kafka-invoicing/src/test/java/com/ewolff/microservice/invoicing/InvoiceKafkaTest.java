@@ -1,23 +1,28 @@
 package com.ewolff.microservice.invoicing;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
 
-import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.util.TestPropertyValues;
+import org.springframework.context.ApplicationContextInitializer;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.test.rule.EmbeddedKafkaRule;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.testcontainers.containers.KafkaContainer;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = InvoiceTestApp.class, webEnvironment = WebEnvironment.NONE)
 @ActiveProfiles("test")
+@ContextConfiguration(initializers = { InvoiceKafkaTest.Initializer.class })
 public class InvoiceKafkaTest {
 
 	@Autowired
@@ -27,13 +32,15 @@ public class InvoiceKafkaTest {
 	public KafkaTemplate<String, String> kafkaTemplate;
 
 	@ClassRule
-	public static EmbeddedKafkaRule embeddedKafka = new EmbeddedKafkaRule(1, false, "order");
+	public static KafkaContainer kafkaContainer = new KafkaContainer();
 
-	@BeforeClass
-	public static void setUpBeforeClass() {
-		System.setProperty("spring.kafka.bootstrap-servers", embeddedKafka.getEmbeddedKafka().getBrokersAsString());
+	static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+		public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
+			TestPropertyValues.of("spring.kafka.bootstrap-servers=" + kafkaContainer.getBootstrapServers())
+					.applyTo(configurableApplicationContext.getEnvironment());
+		}
 	}
-
+	
 	@Test
 	public void orderAreReceived() throws Exception {
 		long countBefore = invoiceRepository.count();
