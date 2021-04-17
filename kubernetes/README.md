@@ -2,7 +2,7 @@
 Run In Kubernetes
 -----------------
 
-See [How to build image](HOW-TO-RUN.md) if you want make from scratch, or use pre built images in the following registy.
+See [How to build image](HOW-TO-RUN.md) if you want make from scratch, or use pre built images in the following registry.
 
 [https://hub.docker.com/u/prasta](https://hub.docker.com/u/prasta)
 - mskafka_apache: `docker pull prasta/mskafka_apache`
