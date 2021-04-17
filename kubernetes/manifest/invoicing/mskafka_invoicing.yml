@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mskafka-invoicing
+  name: mskafka-invoicing
+  namespace: store
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mskafka-invoicing
+  template:
+    metadata:
+      labels:
+        app: mskafka-invoicing
+    spec:
+      containers:
+      - image: prasta/mskafka_invoicing
+        name: mskafka-invoicing
+        env:
+        - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-addr
+              key: kafka_addr
