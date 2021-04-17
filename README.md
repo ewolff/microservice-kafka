@@ -42,7 +42,7 @@ How To Run
 
 See [How to run in docker](HOW-TO-RUN.md) for details.
 
-See [How to run in kubernetes](kubernetes/README.md) for details.
+See [How to run in kubernetes](kubernetes) for details.
 
 Once you create an order in the order application, after a while the
 invoice and the shipment should be shown in the other applications.
