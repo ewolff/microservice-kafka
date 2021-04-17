@@ -15,7 +15,7 @@ See [How to build image](HOW-TO-RUN.md) if you want make from scratch, or use pr
 
 I highly recommend [strimzi.io](https://strimzi.io/) operator for the kafka installation method on kubernetes cluster.
 
-Follow [this procedure](Strimzi-Installation.md) for details of using strimzi.io 
+Follow [this procedure](Strimzi-Installation.md) for details of strimzi.io installation
 
 ### Microservice Installation
 
