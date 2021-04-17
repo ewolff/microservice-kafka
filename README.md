@@ -21,6 +21,11 @@ invoicing each have a separate consumer group. So multiple instances
 of shipment and invoicing can be run. Each instance would get specific
 events.
 
+Architecture
+------------
+
+![](images/microservice-kafka.png)
+
 Technologies
 ------------
 
@@ -35,7 +40,9 @@ Technologies
 How To Run
 ----------
 
-See [How to run](HOW-TO-RUN.md) for details.
+See [How to run in docker](HOW-TO-RUN.md) for details.
+
+See [How to run in kubernetes](kubernetes) for details.
 
 Once you create an order in the order application, after a while the
 invoice and the shipment should be shown in the other applications.

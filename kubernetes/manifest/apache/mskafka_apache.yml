@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mskafka-apache
+  name: mskafka-apache
+  namespace: store
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mskafka-apache
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mskafka-apache
+    spec:
+      containers:
+      - image: prasta/mskafka_apache
+        name: mskafka-apache-5hrnm
+        resources: {}
+status: {}

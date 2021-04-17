@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mskafka-postgres
+  name: mskafka-postgres
+  namespace: store
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mskafka-postgres
+  template:
+    metadata:
+      labels:
+        app: mskafka-postgres
+    spec:
+      containers:
+      - image: prasta/mskafka_postgres
+        name: mskafka-postgres
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: mskafka-postgres-secret
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mskafka-postgres-secret
+              key: password

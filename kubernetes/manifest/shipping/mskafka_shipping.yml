@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mskafka-shipping
+  name: mskafka-shipping
+  namespace: store
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mskafka-shipping
+  template:
+    metadata:
+      labels:
+        app: mskafka-shipping
+    spec:
+      containers:
+      - image: prasta/mskafka_shipping
+        name: mskafka-shipping
+        env:
+        - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-addr
+              key: kafka_addr
