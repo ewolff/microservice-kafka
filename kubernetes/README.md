@@ -66,8 +66,12 @@ Microservice application for this example will running on `store` namespace
     kubectl create -f shipping
     ```
 
-    **Posgres**
+    **Invoicing**
     ```
     kubectl create -f invoicing
     ```
+
+3. Access Frontend apache
+
+    http://<Your_Node_Ip_Address>:30800
 

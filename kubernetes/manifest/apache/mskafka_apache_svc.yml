@@ -11,6 +11,7 @@ spec:
   - port: 80
     protocol: TCP
     targetPort: 80
+    nodePort: 30800
   selector:
     app: mskafka-apache
   type: NodePort
