@@ -11,6 +11,7 @@ services:
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CREATE_TOPICS: "order:5:1"
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
   apache:
     build: apache
     links:
