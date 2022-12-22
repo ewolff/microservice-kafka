@@ -1,10 +1,10 @@
 package com.ewolff.microservice.shipping;
 
-import javax.persistence.Embeddable;
-
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Item {

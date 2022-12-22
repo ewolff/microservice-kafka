@@ -1,6 +1,5 @@
 package com.ewolff.microservice.invoicing;
 
-import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -32,14 +31,14 @@ public class InvoicingServiceTest {
 				new Customer(23, "Eberhard", "Wolff", "eberhard.wolff@innoq.com"),
 				new Date(0L), new Address("Krischstr. 100", "40789", "Monheim am Rhein"), new ArrayList<InvoiceLine>());
 		invoiceService.generateInvoice(invoice);
-		assertThat(invoiceRepository.count(), is(countBefore + 1));
-		assertThat(invoiceRepository.findById(42L).get().getUpdated().getTime(), equalTo(0L));
+		assertEquals(countBefore + 1, invoiceRepository.count());
+		assertEquals(0L, invoiceRepository.findById(42L).get().getUpdated().getTime());
 		invoice = new Invoice(42,
 				new Customer(23, "Eberhard", "Wolff", "eberhard.wolff@innoq.com"),
 				new Date(), new Address("Krischstr. 100", "40789", "Monheim am Rhein"), new ArrayList<InvoiceLine>());
 		invoiceService.generateInvoice(invoice);
-		assertThat(invoiceRepository.count(), is(countBefore + 1));
-		assertThat(invoiceRepository.findById(42L).get().getUpdated().getTime(), equalTo(0L));
+		assertEquals(countBefore + 1, invoiceRepository.count());
+		assertEquals(0L, invoiceRepository.findById(42L).get().getUpdated().getTime());
 	}
 
 }

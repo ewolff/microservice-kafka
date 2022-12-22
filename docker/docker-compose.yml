@@ -31,6 +31,8 @@ services:
      - postgres
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    ports:
+     - "8081:8080"
   shipping:
     build: ../microservice-kafka/microservice-kafka-shipping
     links:
@@ -38,6 +40,8 @@ services:
      - postgres
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    ports:
+     - "8082:8080"
   invoicing:
     build: ../microservice-kafka/microservice-kafka-invoicing
     links:
@@ -45,4 +49,6 @@ services:
      - postgres
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    ports:
+     - "8083:8080"
 

@@ -1,6 +1,6 @@
 package com.ewolff.microservice.invoicing;
 
-import javax.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Address {

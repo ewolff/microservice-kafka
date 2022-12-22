@@ -1,7 +1,6 @@
 package com.ewolff.microservice.shipping;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,14 +32,14 @@ public class ShippingServiceTest {
 				new Date(0L), new Address("Krischstr. 100", "40789", "Monheim am Rhein"),
 				new ArrayList<ShipmentLine>());
 		shipmentService.ship(shipment);
-		assertThat(shipmentRepository.count(), is(countBefore + 1));
-		assertThat(shipmentRepository.findById(42L).get().getUpdated().getTime(), equalTo(0L));
+		assertEquals(countBefore + 1, shipmentRepository.count());
+		assertEquals(0L, shipmentRepository.findById(42L).get().getUpdated().getTime());
 		shipment = new Shipment(42,
 				new Customer(23L, "Eberhard", "Wolff"),
 				new Date(), new Address("Krischstr. 100", "40789", "Monheim am Rhein"), new ArrayList<ShipmentLine>());
 		shipmentService.ship(shipment);
-		assertThat(shipmentRepository.count(), is(countBefore + 1));
-		assertThat(shipmentRepository.findById(42L).get().getUpdated().getTime(), equalTo(0L));
+		assertEquals(countBefore + 1, shipmentRepository.count());
+		assertEquals(0L, shipmentRepository.findById(42L).get().getUpdated().getTime());
 	}
 
 }

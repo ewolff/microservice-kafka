@@ -2,7 +2,6 @@ package com.ewolff.microservice.order.logic;
 
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,6 @@ public class OrderService {
 
 	private KafkaTemplate<String, Order> kafkaTemplate;
 
-	@Autowired
 	private OrderService(OrderRepository orderRepository, KafkaTemplate<String, Order> kafkaTemplate) {
 		super();
 		this.orderRepository = orderRepository;

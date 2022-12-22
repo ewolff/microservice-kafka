@@ -1,8 +1,5 @@
 package com.ewolff.microservice.order;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -13,6 +10,8 @@ import com.ewolff.microservice.order.logic.Address;
 import com.ewolff.microservice.order.logic.Order;
 import com.ewolff.microservice.order.logic.OrderRepository;
 
+import jakarta.annotation.PostConstruct;
+
 @Component
 @Profile("test")
 @DependsOn({ "itemTestDataGenerator", "customerTestDataGenerator" })
@@ -22,7 +21,6 @@ public class OrderTestDataGenerator {
 	private ItemRepository itemRepository;
 	private CustomerRepository customerRepository;
 
-	@Autowired
 	public OrderTestDataGenerator(OrderRepository orderRepository, ItemRepository itemRepository,
 			CustomerRepository customerRepository) {
 		this.orderRepository = orderRepository;

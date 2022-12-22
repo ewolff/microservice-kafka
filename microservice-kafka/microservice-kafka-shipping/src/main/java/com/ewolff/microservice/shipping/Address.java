@@ -1,6 +1,6 @@
 package com.ewolff.microservice.shipping;
 
-import javax.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Address {
