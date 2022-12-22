@@ -1,5 +1,5 @@
 name: Build and Publish Docker Images
-2
+
 on:
   push:
     branches: [ master ]
