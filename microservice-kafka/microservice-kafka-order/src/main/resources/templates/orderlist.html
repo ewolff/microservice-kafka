@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-	layout:decorator="layout">
-<head>
-<title>Order : View all</title>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout :: common_head(~{::title})}">
+	<title>Order: View all</title>
 </head>
-<body>
-	<h1 layout:fragment="header">Order : View all</h1>
-	<div layout:fragment="content" class="container">
+
+<body th:replace="~{layout :: common_body(~{::h1},~{::#content})}">
+	<h1>Order: View all</h1>
+	<div id="content" class="container">
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
@@ -22,15 +22,15 @@
 					<td colspan="4">No orders</td>
 				</tr>
 				<tr th:each="order : ${orders}">
-					<td><a href="order/1" th:href="${order.id}"
-						th:text="${order.id}">1</a></td>
-					<td
-						th:text="${order.customer.firstname} + ' ' + ${order.customer.name}">Firstname
+					<td><a href="order/1" th:href="${order.id}" th:text="${order.id}">1</a></td>
+					<td th:text="${order?.customer?.firstname} + ' ' + ${order?.customer?.name}">Firstname
 						Name</td>
 					<td th:text="${order.totalPrice()}">42.0</td>
-					<td><form th:action="'/order/'+${order.id}" th:method="delete">
+					<td>
+						<form th:action="'/order/'+${order.id}" th:method="delete">
 							<input type="submit" value="delete" class="btn btn-link" />
-						</form></td>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -41,4 +41,5 @@
 		</div>
 	</div>
 </body>
+
 </html>

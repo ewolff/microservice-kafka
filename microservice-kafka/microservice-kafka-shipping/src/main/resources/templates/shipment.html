@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-	layout:decorator="layout">
-<head>
-<title>Shipping</title>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout :: common_head(~{::title})}">
+	<title>Shipments</title>
 </head>
-<body>
-	<h1 layout:fragment="header">Shipping</h1>
-	<div layout:fragment="content" class="container">
+
+<body th:replace="~{layout :: common_body(~{::h1},~{::#content})}">
+	<h1>Shipping</h1>
+	<div id="content" class="container">
 
 		<div class="row">
 			<div class="col-md-2">
 				<b>Customer</b>
 			</div>
-			<div class="col-md-2"
-				th:text="${shipment.customer.firstname}+' '+${shipment.customer.name}"></div>
+			<div class="col-md-2" th:text="${shipment.customer.firstname}+' '+${shipment.customer.name}"></div>
 		</div>
 
 		<div class="row">
@@ -64,4 +63,5 @@
 
 	</div>
 </body>
+
 </html>

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-	layout:decorator="layout">
-<head>
-<title>Shipments : View all</title>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout :: common_head(~{::title})}">
+	<title>Shipments : View all</title>
 </head>
-<body>
-	<h1 layout:fragment="header">Shipments : View all</h1>
-	<div layout:fragment="content" class="container">
+
+<body th:replace="~{layout :: common_body(~{::h1},~{::#content})}">
+
+	<h1>Shipments : View all</h1>
+	<div id="content" class="container">
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
@@ -20,14 +21,13 @@
 					<td colspan="4">No shipments</td>
 				</tr>
 				<tr th:each="shipment : ${shipments}">
-					<td><a href="shipment/1" th:href="${shipment.id}"
-						th:text="${shipment.id}">1</a></td>
-					<td
-						th:text="${shipment.customer.firstname} + ' ' + ${shipment.customer.name}">Firstname
+					<td><a href="shipment/1" th:href="${shipment.id}" th:text="${shipment.id}">1</a></td>
+					<td th:text="${shipment.customer.firstname} + ' ' + ${shipment.customer.name}">Firstname
 						Name</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </body>
+
 </html>

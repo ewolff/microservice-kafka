@@ -1,28 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Layout</title>
-<link rel="stylesheet"
-	href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css" />
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="common_head(title)">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title th:replace="${title}">Layout</title>
+	<link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css" />
 </head>
 
-<body>
-	<div class="container">
-		<div class="navbar">
-			<div class="navbar-inner">
-				<a class="brand" href="/"> Home</a> <a class="brand"
-					href="https://github.com/ultraq/thymeleaf-layout-dialect">
-					Thymeleaf - Layout </a>
-
-			</div>
+<body th:fragment="common_body(header,content)">
+	<div class="navbar">
+		<div class="navbar-inner">
+			<a class="brand" href="/"> Home</a> 
 		</div>
-		<h1 layout:fragment="header">Layout</h1>
-		<div layout:fragment="content">Fake content</div>
 	</div>
+	<h1 th:replace="${header}">Layout</h1>
+	<div th:replace="${content}">Fake content</div>
 	<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js" />
-</body>
+	</body>
 </html>
