@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mskafka-apache
+  name: mskafka-apache
+  namespace: store
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 30800
+  selector:
+    app: mskafka-apache
+  type: NodePort
+status:
+  loadBalancer: {}
